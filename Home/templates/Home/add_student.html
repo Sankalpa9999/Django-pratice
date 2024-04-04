@@ -1,12 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
-</head>
-<body>
+{%extends 'base.html'%}
+{%block content%}
+<div class = "container">
     <h2>Add Student and update </h2>
     <form method="POST">
         {% csrf_token %}
@@ -20,5 +14,6 @@
         <input type="text" id="city" name="city"><br><br>
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+    </div>
+
+{%endblock%}

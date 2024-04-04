@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . models import Student
 from .forms import StudentCreationForm, UpdateStudentForm
@@ -34,7 +34,7 @@ def add_student(request):
         if form.is_valid():
             form.save()
             return HttpResponse("Student Added Successfully")
-    return render(request,'Home/add_student.html',{'form':form})
+    return render(request,'Home/add_student.html',{'form':form})  
     
 # def update_student(request,id):
 #     student = Student.objects.get(pk=id)
@@ -61,14 +61,14 @@ def update_student(request,id):
         form = UpdateStudentForm(request.POST,instance=student)
         if form.is_valid():
             form.save()
-            return HttpResponse("Student Updated Successfully")
-    return render(request,'Home/update.html',{'form':form})
+            return redirect('index')
+    return render(request,'Home/update.html',{'form':form})   
     
     
 def delete_student(request,id):
     student = Student.objects.get(pk=id)
     student.delete()
-    return HttpResponse("Student Deleted Successfully") 
+    return redirect('index')  
     
 # def about(request):
     
