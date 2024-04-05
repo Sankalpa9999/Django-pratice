@@ -30,10 +30,10 @@ def index (request):
 def add_student(request):
     form = StudentCreationForm()
     if request.method == 'POST':
-        form = StudentCreationForm(request.POST)
+        form = StudentCreationForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return HttpResponse("Student Added Successfully")
+            return redirect('index')
     return render(request,'Home/add_student.html',{'form':form})  
     
 # def update_student(request,id):
@@ -56,7 +56,7 @@ def add_student(request):
 
 def update_student(request,id):
     student = Student.objects.get(pk=id)
-    form = UpdateStudentForm(instance=student)
+    form = UpdateStudentForm(instance=student,)
     if request.method == 'POST':
         form = UpdateStudentForm(request.POST,instance=student)
         if form.is_valid():

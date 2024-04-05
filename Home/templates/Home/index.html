@@ -1,12 +1,14 @@
 {%extends 'base.html'%}
-
+{% load static %}
 {%block content %}
 <div class="container">
     <h1>This is Home page</h1>
     <table>
         <thead>
             <tr>
+
                 <th>Id</th>
+                <th>Photo</th>
                 <th>Name</th>
                 <th>Roll</th>
                 <th>City</th>
@@ -17,7 +19,13 @@
         <tbody>
             {% for student in students %}
             <tr>
+
                 <td>{{ student.id }}</td>
+                {% if student.image %}
+                <td><img src="{{student.image.url}}" width = '30',height='30' alt="ullullu"></td>
+                {% else %}
+                <td>hal na paila</td>
+                {% endif %}
                 <td>{{ student.name }}</td>
                 <td>{{ student.roll }}</td>
                 <td>{{ student.city }}</td>
@@ -27,5 +35,6 @@
             </tr>
             {% endfor %}
         </tbody>
+        <img src="{% static 'image\minato.jpg' %}" alt="ullulu" width="30%">
 </div>
 {%endblock%}

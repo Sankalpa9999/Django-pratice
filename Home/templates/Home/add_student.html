@@ -2,7 +2,7 @@
 {%block content%}
 <div class = "container">
     <h2>Add Student and update </h2>
-    <form method="POST">
+    <form method="POST", enctype="multipart/form-data">
         {% csrf_token %}
 
      
@@ -12,6 +12,8 @@
         <input type="text" id="roll" name="roll"><br>
         <label for="city">City:</label><br>
         <input type="text" id="city" name="city"><br><br>
+        <label for="img">Image:</label><br>
+        <input type="file" id="image" name="image"><br><br>
         <button type="submit">Submit</button>
     </form>
     </div>
