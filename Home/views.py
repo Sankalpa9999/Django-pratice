@@ -58,7 +58,7 @@ def update_student(request,id):
     student = Student.objects.get(pk=id)
     form = UpdateStudentForm(instance=student,)
     if request.method == 'POST':
-        form = UpdateStudentForm(request.POST,instance=student)
+        form = UpdateStudentForm(request.POST,request.FILES, instance=student)
         if form.is_valid():
             form.save()
             return redirect('index')
