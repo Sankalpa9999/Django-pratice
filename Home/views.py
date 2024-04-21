@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from . models import Student
 from .forms import StudentCreationForm, UpdateStudentForm
+
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
-
+@login_required(login_url='login')
 
 
 def index (request):
@@ -28,6 +30,8 @@ def index (request):
 
 
 def add_student(request):
+    if not request.user.is_superuser:
+        return redirect('index')
     form = StudentCreationForm()
     if request.method == 'POST':
         form = StudentCreationForm(request.POST,request.FILES)
@@ -55,6 +59,8 @@ def add_student(request):
 #         return render(request,'Home/add_student.html',{'student':student})  
 
 def update_student(request,id):
+    # if not request.user.is_superuser:
+    #     return redirect('index')
     student = Student.objects.get(pk=id)
     form = UpdateStudentForm(instance=student,)
     if request.method == 'POST':
